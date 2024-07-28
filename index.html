@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kansas City Crime</title>
+    <title>Kansas City Crime News</title>
     <link rel="stylesheet" href="styles.css">
     <!-- Google Ads -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body>
     <header>
-        <h1>Kansas City Crime</h1>
+        <div class="container">
+            <h1>Kansas City Crime News</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Reports</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <main>
+    <main class="container">
         <!-- Google Ad -->
         <ins class="adsbygoogle"
              style="display:block"
@@ -22,9 +32,20 @@
         <script>
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
+
+        <section id="news-posts">
+            <h2>Recent News</h2>
+            <div class="post">
+                <h3>Example News Title</h3>
+                <p>Example news content goes here. This is a sample news article. More content can be added here.</p>
+                <div class="disqus-comments">
+                    <div id="disqus_thread"></div>
+                </div>
+            </div>
+        </section>
         
         <section id="post-form">
-            <h2>Share your story</h2>
+            <h2>Share Your Story</h2>
             <form id="commentForm">
                 <label for="username">Name:</label>
                 <input type="text" id="username" name="username" required>
@@ -38,40 +59,26 @@
                 <button type="submit">Post</button>
             </form>
         </section>
-        
-        <section id="posts">
-            <h2>Recent Posts</h2>
-            <div id="postsContainer"></div>
-        </section>
-
-        <!-- Disqus Comment Section -->
-        <div id="disqus_thread"></div>
-        <script>
-            var disqus_config = function () {
-                this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
-                this.page.identifier = window.location.pathname; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-
-            (function() {
-                var d = document, s = d.createElement('script');
-                s.src = 'https://kansascitycrime.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        
-        <!-- Google Ad -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-XXXXXX"
-             data-ad-slot="XXXXXX"
-             data-ad-format="auto"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
     </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Kansas City Crime News. All rights reserved.</p>
+        </div>
+    </footer>
     <script src="script.js"></script>
-    <script id="dsq-count-scr" src="//kansascitycrime.disqus.com/count.js" async></script>
+    <script>
+        var disqus_config = function () {
+            this.page.url = window.location.href;
+            this.page.identifier = window.location.pathname;
+        };
+
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://YOUR_DISQUS_SHORTNAME.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </body>
 </html>
