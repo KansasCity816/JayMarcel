@@ -44,16 +44,46 @@
                     </article>
                 </div>
             </section>
-            <section id="news-posts">
-                <h2>Recent News</h2>
+            <section id="latest-news">
+                <h2>Latest News</h2>
                 <article class="post">
                     <h3>News Title</h3>
+                    <img src="https://via.placeholder.com/600x400" alt="News Image">
                     <p>News content goes here. This is a sample news article. More content can be added here.</p>
                     <div class="disqus-comments">
                         <div id="disqus_thread"></div>
                     </div>
                 </article>
                 <!-- Additional articles can be added here -->
+            </section>
+            <section id="categories">
+                <h2>Categories</h2>
+                <div class="category-grid">
+                    <article class="category">
+                        <h3>Category 1</h3>
+                        <ul>
+                            <li><a href="#">Article 1</a></li>
+                            <li><a href="#">Article 2</a></li>
+                            <li><a href="#">Article 3</a></li>
+                        </ul>
+                    </article>
+                    <article class="category">
+                        <h3>Category 2</h3>
+                        <ul>
+                            <li><a href="#">Article 1</a></li>
+                            <li><a href="#">Article 2</a></li>
+                            <li><a href="#">Article 3</a></li>
+                        </ul>
+                    </article>
+                    <article class="category">
+                        <h3>Category 3</h3>
+                        <ul>
+                            <li><a href="#">Article 1</a></li>
+                            <li><a href="#">Article 2</a></li>
+                            <li><a href="#">Article 3</a></li>
+                        </ul>
+                    </article>
+                </div>
             </section>
         </div>
         <aside class="sidebar">
@@ -81,4 +111,13 @@
             this.page.identifier = window.location.pathname;
         };
 
- 
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://kansascitycrime.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</body>
+</html>
