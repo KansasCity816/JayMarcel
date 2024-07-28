@@ -42,17 +42,22 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-main {
+main .container {
+    display: flex;
+    justify-content: space-between;
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
-h2 {
-    color: #333;
+.content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 #news-posts {
+    width: 70%;
     background: #fff;
     padding: 1rem;
     border-radius: 5px;
@@ -66,6 +71,14 @@ h2 {
 
 #news-posts .post h3 {
     margin-top: 0;
+}
+
+.sidebar {
+    width: 25%;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 footer {
