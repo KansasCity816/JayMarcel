@@ -93,39 +93,10 @@ main {
     padding: 1rem;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
 }
 
 .featured img {
     max-width: 100%;
     height: auto;
-    border-radius: 5px;
-}
-
-#news-posts {
-    background: #fff;
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#news-posts .post {
-    margin-bottom: 1rem;
-}
-
-#news-posts .post h3 {
-    margin-top: 0;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1rem 0;
-    margin-top: 2rem;
-}
-
-footer .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
+    border-radi
