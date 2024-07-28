@@ -11,47 +11,49 @@
 <body>
     <header>
         <div class="container">
-            <h1>Kansas City Crime News</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">News</a></li>
-                    <li><a href="#">Reports</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
+            <div class="header-top">
+                <h1>Kansas City Crime News</h1>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Reports</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="header-banner">
+                <h2>Latest Updates in Kansas City Crime</h2>
+            </div>
         </div>
     </header>
     <main class="container">
         <div class="main-content">
-            <section id="featured">
-                <h2>Featured News</h2>
-                <article class="featured-article">
-                    <h3>Featured News Title</h3>
-                    <img src="https://via.placeholder.com/800x400" alt="Featured News Image">
-                    <p>This is a sample description for the featured news. More details about the news content can be added here.</p>
-                </article>
+            <section id="featured-articles">
+                <h2>Featured Articles</h2>
+                <div class="featured-grid">
+                    <article class="featured">
+                        <img src="https://via.placeholder.com/600x400" alt="Article Image">
+                        <h3>Featured News Title 1</h3>
+                        <p>Summary of the featured news article goes here. This is a brief description of the news content.</p>
+                    </article>
+                    <article class="featured">
+                        <img src="https://via.placeholder.com/600x400" alt="Article Image">
+                        <h3>Featured News Title 2</h3>
+                        <p>Summary of the featured news article goes here. This is a brief description of the news content.</p>
+                    </article>
+                </div>
             </section>
-            <section id="latest-news">
-                <h2>Latest News</h2>
-                <article class="news-article">
-                    <h3>News Title 1</h3>
-                    <img src="https://via.placeholder.com/400x200" alt="News Image 1">
-                    <p>Short description for news 1.</p>
-                    <a href="#">Read more</a>
+            <section id="news-posts">
+                <h2>Recent News</h2>
+                <article class="post">
+                    <h3>News Title</h3>
+                    <p>News content goes here. This is a sample news article. More content can be added here.</p>
+                    <div class="disqus-comments">
+                        <div id="disqus_thread"></div>
+                    </div>
                 </article>
-                <article class="news-article">
-                    <h3>News Title 2</h3>
-                    <img src="https://via.placeholder.com/400x200" alt="News Image 2">
-                    <p>Short description for news 2.</p>
-                    <a href="#">Read more</a>
-                </article>
-                <article class="news-article">
-                    <h3>News Title 3</h3>
-                    <img src="https://via.placeholder.com/400x200" alt="News Image 3">
-                    <p>Short description for news 3.</p>
-                    <a href="#">Read more</a>
-                </article>
+                <!-- Additional articles can be added here -->
             </section>
         </div>
         <aside class="sidebar">
@@ -79,13 +81,4 @@
             this.page.identifier = window.location.pathname;
         };
 
-        (function() {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://kansascitycrime.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</body>
-</html>
+ 
