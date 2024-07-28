@@ -3,20 +3,24 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 header {
     background-color: #333;
     color: #fff;
     padding: 1rem 0;
-    text-align: center;
 }
 
-header .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+header .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header h1 {
@@ -27,8 +31,6 @@ header h1 {
 nav ul {
     list-style: none;
     padding: 0;
-    margin: 1rem 0 0;
-    text-align: center;
 }
 
 nav ul li {
@@ -45,62 +47,73 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+.header-banner {
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+header h2 {
+    margin: 0;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
 }
 
 .main-content {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    float: left;
+    flex: 0 0 70%;
+    margin-right: 2%;
 }
 
 .sidebar {
-    width: 25%;
-    float: right;
+    flex: 0 0 28%;
     background: #fff;
     padding: 1rem;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#featured, #latest-news {
-    background: #fff;
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+#featured-articles {
     margin-bottom: 2rem;
 }
 
-#featured .featured-article img,
-#latest-news .news-article img {
+.featured-grid {
+    display: flex;
+    justify-content: space-between;
+}
+
+.featured {
+    flex: 0 0 48%;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.featured img {
     max-width: 100%;
     height: auto;
     border-radius: 5px;
+}
+
+#news-posts {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#news-posts .post {
     margin-bottom: 1rem;
 }
 
-#latest-news .news-article {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1.5rem;
-}
-
-#latest-news .news-article h3 {
+#news-posts .post h3 {
     margin-top: 0;
-}
-
-#latest-news .news-article a {
-    color: #007BFF;
-    text-decoration: none;
-    margin-top: auto;
-}
-
-#latest-news .news-article a:hover {
-    text-decoration: underline;
 }
 
 footer {
@@ -108,7 +121,7 @@ footer {
     color: #fff;
     text-align: center;
     padding: 1rem 0;
-    clear: both;
+    margin-top: 2rem;
 }
 
 footer .container {
