@@ -68,43 +68,6 @@ h2 {
     margin-top: 0;
 }
 
-#post-form {
-    background: #fff;
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    margin-top: 1rem;
-}
-
-input, textarea {
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-button {
-    margin-top: 1rem;
-    padding: 0.5rem;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #555;
-}
-
 footer {
     background-color: #333;
     color: #fff;
