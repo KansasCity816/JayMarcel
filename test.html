@@ -19,6 +19,7 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,500,600,700,800&display=swap" rel="stylesheet"> 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800&display=swap" rel="stylesheet"> 
   <script src="https://rss2json.com/gfapi.js"></script>
+
 </head>
 <body>
 
@@ -64,7 +65,7 @@
   
 <script>
   function loadRSS() {
-    const rssUrl = 'https://www.kansascity.com/news/local/crime/article244450427.html?outputType=xml';
+    const rssUrl = 'https://rss.app/rss-feed/kmbc-rss-feed';
     const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
     $.get(apiUrl, function(data) {
