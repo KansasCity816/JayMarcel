@@ -6,9 +6,33 @@
   <title>RSS Feed Example</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <style>
+    .utf_post_block_style {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .utf_post_thumb img {
+      width: 100%;
+    }
+    .utf_post_cat {
+      display: block;
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    .utf_post_title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .utf_post_meta {
+      font-size: 12px;
+      color: #999;
+    }
+  </style>
 </head>
 <body>
 
@@ -19,65 +43,50 @@
       <h3 class="utf_block_title"><span>Latest News</span></h3>
         <div id="utf_latest_news_slide" class="owl-carousel owl-theme utf_latest_news_slide">
           <div class="item">
-            <ul class="utf_list_post">
-              <li class="clearfix">
-                <div class="utf_post_block_style clearfix">
-                  <div class="utf_post_thumb"> <a href="#"><img class="img-fluid" src="images/news/lifestyle/health5.jpg" alt="" /></a> </div>
-                  <a class="utf_post_cat" href="#">Health</a>
-                  <div class="utf_post_content">
-                    <h2 class="utf_post_title title-medium"> <a href="#">Placeholder Title</a> </h2>
-                    <div class="utf_post_meta"> <span class="utf_post_author"><i class="fa fa-user"></i> <a href="#">Author</a></span> <span class="utf_post_date"><i class="fa fa-clock-o"></i> Date</span> </div>
-                  </div>
-                </div>
-              </li>
-              
-              <li class="clearfix">
-                <div class="utf_post_block_style clearfix">
-                  <div class="utf_post_thumb"> <a href="#"><img class="img-fluid" src="images/news/lifestyle/travel4.jpg" alt="" /></a> </div>
-                  <a class="utf_post_cat" href="#">Travel</a>
-                  <div class="utf_post_content">
-                    <h2 class="utf_post_title title-medium"> <a href="#">Placeholder Title</a> </h2>
-                    <div class="utf_post_meta"> <span class="utf_post_author"><i class="fa fa-user"></i> <a href="#">Author</a></span> <span class="utf_post_date"><i class="fa fa-clock-o"></i> Date</span> </div>
-                  </div>
-                </div>
-              </li>
-            </ul>            
+            <ul class="utf_list_post" id="rss-feed-container">
+              <!-- Feed items will be appended here -->
+            </ul>
           </div>
-          
-          <!-- More items here... -->
-          
         </div>
       </div>
     </div>        
   </section>
   <!-- Latest News Area End --> 
-
+  
 <script>
   function loadRSS() {
     const rssUrl = 'https://rss2json.com/api.json?rss_url=https://www.kmbc.com/topstories-rss';
-
     $.get(rssUrl, function(data) {
       const items = data.items;
-      const postsContainer = $('#utf_latest_news_slide .item ul');
-
+      const postsContainer = $('#rss-feed-container');
       postsContainer.empty();
 
-      items.forEach((item, index) => {
-        if (index >= 2) return; // Limit to 2 items per "item" container
-
+      items.forEach(item => {
         const postHtml = `
           <li class="clearfix">
             <div class="utf_post_block_style clearfix">
-              <div class="utf_post_thumb"> <a href="${item.link}"><img class="img-fluid" src="${item.thumbnail}" alt="" /></a> </div>
-              <a class="utf_post_cat" href="${item.link}">${item.categories[0]}</a>
+              <div class="utf_post_thumb">
+                <a href="${item.link}" target="_blank">
+                  <img class="img-fluid" src="${item.enclosure ? item.enclosure.link : 'images/news/default.jpg'}" alt="" />
+                </a>
+              </div>
+              <a class="utf_post_cat" href="${item.link}" target="_blank">${item.categories[0] || 'News'}</a>
               <div class="utf_post_content">
-                <h2 class="utf_post_title title-medium"> <a href="${item.link}">${item.title}</a> </h2>
-                <div class="utf_post_meta"> <span class="utf_post_author"><i class="fa fa-user"></i> <a href="${item.link}">${item.author || 'Unknown'}</a></span> <span class="utf_post_date"><i class="fa fa-clock-o"></i> ${new Date(item.pubDate).toLocaleDateString()}</span> </div>
+                <h2 class="utf_post_title title-medium">
+                  <a href="${item.link}" target="_blank">${item.title}</a>
+                </h2>
+                <div class="utf_post_meta">
+                  <span class="utf_post_author">
+                    <i class="fa fa-user"></i> <a href="${item.link}" target="_blank">${item.author || 'Unknown'}</a>
+                  </span>
+                  <span class="utf_post_date">
+                    <i class="fa fa-clock-o"></i> ${new Date(item.pubDate).toLocaleDateString()}
+                  </span>
+                </div>
               </div>
             </div>
           </li>
         `;
-
         postsContainer.append(postHtml);
       });
     }).fail(function(error) {
@@ -89,6 +98,5 @@
     loadRSS();
   });
 </script>
-
 </body>
 </html>
