@@ -55,7 +55,7 @@
   
 <script>
   function loadRSS() {
-    const rssUrl = 'https://rss2json.com/api.json?rss_url=https://www.kmbc.com/topstories-rss';
+    const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://www.kmbc.com/topstories-rss';
     $.get(rssUrl, function(data) {
       const items = data.items;
       const postsContainer = $('#rss-feed-container');
@@ -70,7 +70,7 @@
                   <img class="img-fluid" src="${item.enclosure ? item.enclosure.link : 'images/news/default.jpg'}" alt="" />
                 </a>
               </div>
-              <a class="utf_post_cat" href="${item.link}" target="_blank">${item.categories[0] || 'News'}</a>
+              <a class="utf_post_cat" href="${item.link}" target="_blank">${item.categories ? item.categories[0] : 'News'}</a>
               <div class="utf_post_content">
                 <h2 class="utf_post_title title-medium">
                   <a href="${item.link}" target="_blank">${item.title}</a>
