@@ -6,10 +6,9 @@
   <title>RSS Feed Example</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.default.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
 </head>
 <body>
 
@@ -55,45 +54,31 @@
 
 <script>
   function loadRSS() {
-    const rssUrl = 'https://rss2json.com/gfapi.js?rss_url=kmbc.com/topstories-rss';
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+    const rssUrl = 'https://rss2json.com/api.json?rss_url=https://www.kmbc.com/topstories-rss';
 
-    $.get(apiUrl, function(data) {
-      const items = document.querySelectorAll('.item');
-      data.items.forEach((item, index) => {
-        if (items[index]) {
-          const posts = items[index].querySelectorAll('.utf_post_block_style');
-          posts.forEach((post, postIndex) => {
-            const postThumb = post.querySelector('.utf_post_thumb a');
-            if (postThumb) {
-              postThumb.href = item.link;
-              postThumb.querySelector('img').src = item.enclosure ? item.enclosure.link : 'images/news/default.jpg';
-            }
+    $.get(rssUrl, function(data) {
+      const items = data.items;
+      const postsContainer = $('#utf_latest_news_slide .item ul');
 
-            const postCat = post.querySelector('.utf_post_cat');
-            if (postCat) {
-              postCat.textContent = item.categories.length > 0 ? item.categories[0] : 'News';
-              postCat.href = item.link;
-            }
+      postsContainer.empty();
 
-            const postTitle = post.querySelector('.utf_post_title a');
-            if (postTitle) {
-              postTitle.href = item.link;
-              postTitle.textContent = item.title;
-            }
+      items.forEach((item, index) => {
+        if (index >= 2) return; // Limit to 2 items per "item" container
 
-            const postDate = post.querySelector('.utf_post_date');
-            if (postDate) {
-              postDate.innerHTML = `<i class="fa fa-clock-o"></i> ${new Date(item.pubDate).toLocaleDateString()}`;
-            }
+        const postHtml = `
+          <li class="clearfix">
+            <div class="utf_post_block_style clearfix">
+              <div class="utf_post_thumb"> <a href="${item.link}"><img class="img-fluid" src="${item.thumbnail}" alt="" /></a> </div>
+              <a class="utf_post_cat" href="${item.link}">${item.categories[0]}</a>
+              <div class="utf_post_content">
+                <h2 class="utf_post_title title-medium"> <a href="${item.link}">${item.title}</a> </h2>
+                <div class="utf_post_meta"> <span class="utf_post_author"><i class="fa fa-user"></i> <a href="${item.link}">${item.author || 'Unknown'}</a></span> <span class="utf_post_date"><i class="fa fa-clock-o"></i> ${new Date(item.pubDate).toLocaleDateString()}</span> </div>
+              </div>
+            </div>
+          </li>
+        `;
 
-            const postAuthor = post.querySelector('.utf_post_author a');
-            if (postAuthor) {
-              postAuthor.textContent = item.author || 'Unknown';
-              postAuthor.href = item.link;
-            }
-          });
-        }
+        postsContainer.append(postHtml);
       });
     }).fail(function(error) {
       console.error('Error fetching RSS feed:', error);
