@@ -55,7 +55,7 @@
 
 <script>
   function loadRSS() {
-    const rssUrl = 'https://rss2json.com/gfapi.js?rss_url=https://www.kansascity.com/latest-news/?widgetName=rssfeed&widgetContentId=712882&getXmlFeed=true';
+    const rssUrl = 'https://rss2json.com/gfapi.js?rss_url=kmbc.com/topstories-rss';
     const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
     $.get(apiUrl, function(data) {
