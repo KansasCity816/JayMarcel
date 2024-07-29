@@ -19,56 +19,6 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,500,600,700,800&display=swap" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800&display=swap" rel="stylesheet"> 
 <script src="https://rss2json.com/gfapi.js"></script>
-<script>
-  function loadRSS() {
-    const rssUrl = 'https://www.kansascity.com/news/crime/article201926354.html?outputType=xml';
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-
-    fetch(apiUrl)
-      .then(response => response.json())
-      .then(data => {
-        const items = document.querySelectorAll('.item');
-        data.items.forEach((item, index) => {
-          if (items[index]) {
-            const postBlock = items[index].querySelector('.utf_post_block_style');
-            if (postBlock) {
-              const postThumb = postBlock.querySelector('.utf_post_thumb a');
-              if (postThumb) {
-                postThumb.href = item.link;
-                postThumb.querySelector('img').src = item.enclosure ? item.enclosure.link : 'images/news/default.jpg';
-              }
-
-              const postCat = postBlock.querySelector('.utf_post_cat');
-              if (postCat) {
-                postCat.textContent = item.categories.length > 0 ? item.categories[0] : 'News';
-                postCat.href = item.link;
-              }
-
-              const postTitle = postBlock.querySelector('.utf_post_title a');
-              if (postTitle) {
-                postTitle.href = item.link;
-                postTitle.textContent = item.title;
-              }
-
-              const postDate = postBlock.querySelector('.utf_post_date');
-              if (postDate) {
-                postDate.innerHTML = `<i class="fa fa-clock-o"></i> ${new Date(item.pubDate).toLocaleDateString()}`;
-              }
-
-              const postAuthor = postBlock.querySelector('.utf_post_author a');
-              if (postAuthor) {
-                postAuthor.textContent = item.author || 'Unknown';
-                postAuthor.href = item.link;
-              }
-            }
-          }
-        });
-      })
-      .catch(error => console.error('Error fetching RSS feed:', error));
-  }
-
-  document.addEventListener('DOMContentLoaded', loadRSS);
-</script>
 
 </head>
 <body>
