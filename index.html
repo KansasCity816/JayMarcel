@@ -34,13 +34,16 @@
     fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
-        const articles = document.querySelectorAll('.utf_post_block_style');
+        const items = document.querySelectorAll('#utf_latest_news_slide .item');
         data.items.forEach((item, index) => {
-          if (articles[index]) {
-            articles[index].querySelector('a').href = item.link;
-            articles[index].querySelector('a').textContent = item.title;
-            articles[index].querySelector('.utf_post_date').textContent = item.pubDate;
-            articles[index].querySelector('.utf_post_thumb img').src = item.enclosure.link; // Assumes the RSS feed has image links
+          if (items[index]) {
+            const article = items[index].querySelector('.utf_post_block_style');
+            article.querySelector('a').href = item.link;
+            article.querySelector('.utf_post_title a').textContent = item.title;
+            article.querySelector('.utf_post_date').textContent = new Date(item.pubDate).toLocaleDateString();
+            if (item.thumbnail) {
+              article.querySelector('.utf_post_thumb img').src = item.thumbnail;
+            }
           }
         });
       })
@@ -49,6 +52,7 @@
 
   document.addEventListener('DOMContentLoaded', loadRSS);
 </script>
+
 
 
 </head>
