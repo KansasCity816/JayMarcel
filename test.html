@@ -56,7 +56,7 @@
 <script>
   function loadRSS() {
     const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://www.kmbc.com/topstories-rss';
-    const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+    const corsProxy = 'https://crossorigin.me/';
     $.get(corsProxy + rssUrl, function(data) {
       const items = data.items;
       const postsContainer = $('#rss-feed-container');
