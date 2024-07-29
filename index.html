@@ -25,6 +25,32 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,500,600,700,800&display=swap" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800&display=swap" rel="stylesheet"> 
+<script src="https://rss2json.com/gfapi.js"></script>
+<script>
+  function loadRSS() {
+    const rssUrl = 'https://www.kansascity.com/news/crime/article201926354.html?outputType=xml';
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const articles = document.querySelectorAll('.utf_post_block_style');
+        data.items.forEach((item, index) => {
+          if (articles[index]) {
+            articles[index].querySelector('a').href = item.link;
+            articles[index].querySelector('a').textContent = item.title;
+            articles[index].querySelector('.utf_post_date').textContent = item.pubDate;
+            articles[index].querySelector('.utf_post_thumb img').src = item.enclosure.link; // Assumes the RSS feed has image links
+          }
+        });
+      })
+      .catch(error => console.error('Error fetching RSS feed:', error));
+  }
+
+  document.addEventListener('DOMContentLoaded', loadRSS);
+</script>
+
+
 </head>
 <body>
 
@@ -443,7 +469,7 @@
 				  <div class="utf_post_thumb"> <a href="#"><img class="img-fluid" src="images/news/lifestyle/health5.jpg" alt="" /></a> </div>
 				  <a class="utf_post_cat" href="#">Health</a>
 				  <div class="utf_post_content">
-					<h2 class="utf_post_title title-medium"> <a href="#">Zhang social media pop also known when smart innocent...</a> </h2>
+					<h2 class="utf_post_title title-medium"> <a href="#">HeyZhang social media pop also known when smart innocent...</a> </h2>
 					<div class="utf_post_meta"> <span class="utf_post_author"><i class="fa fa-user"></i> <a href="#">John Wick</a></span> <span class="utf_post_date"><i class="fa fa-clock-o"></i> 25 Jan, 2022</span> </div>
 				  </div>
 				</div>
