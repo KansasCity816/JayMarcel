@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSS Feed Example</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .utf_post_thumb img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Latest News Area Start --> 
+<section class="utf_latest_new_area pb-bottom-20">
+   <div class="container">
+    <div class="utf_latest_news block color-red">
+      <h3 class="utf_block_title"><span>Latest News</span></h3>
+        <div id="utf_latest_news_slide" class="owl-carousel owl-theme utf_latest_news_slide">
+          <div class="item">
+            <ul class="utf_list_post">
+              <li class="clearfix">
+                <div class="utf_post_block_style clearfix">
+                  <div class="utf_post_thumb"> <a href="#"><img class="img-fluid" src="images/news/lifestyle/health5.jpg" alt="" /></a> </div>
+                  <a class="utf_post_cat" href="#">Health</a>
+                  <div class="utf_post_content">
+                    <h2 class="utf_post_title title-medium"> <a href="#">HeyZhang social media pop also known when smart innocent...</a> </h2>
+                    <div class="utf_post_meta"> <span class="utf_post_author"><i class="fa fa-user"></i> <a href="#">John Wick</a></span> <span class="utf_post_date"><i class="fa fa-clock-o"></i> 25 Jan, 2022</span> </div>
+                  </div>
+                </div>
+              </li>
+              
+              <li class="clearfix">
+                <div class="utf_post_block_style clearfix">
+                  <div class="utf_post_thumb"> <a href="#"><img class="img-fluid" src="images/news/lifestyle/travel4.jpg" alt="" /></a> </div>
+                  <a class="utf_post_cat" href="#">Travel</a>
+                  <div class="utf_post_content">
+                    <h2 class="utf_post_title title-medium"> <a href="#">Zhang social media pop also known when smart innocent...</a> </h2>
+                    <div class="utf_post_meta"> <span class="utf_post_author"><i class="fa fa-user"></i> <a href="#">John Wick</a></span> <span class="utf_post_date"><i class="fa fa-clock-o"></i> 25 Jan, 2022</span> </div>
+                  </div>
+                </div>
+              </li>
+            </ul>            
+          </div>
+          
+          <!-- More items here... -->
+          
+        </div>
+      </div>
+    </div>        
+  </section>
+  <!-- Latest News Area End --> 
+  
+<script>
+  function loadRSS() {
+    const rssUrl = 'https://www.kansascity.com/news/crime/article201926354.html?outputType=xml';
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const items = document.querySelectorAll('.item');
+        data.items.forEach((item, index) => {
+          if (items[index]) {
+            const posts = items[index].querySelectorAll('.utf_post_block_style');
+            posts.forEach((post, postIndex) => {
+              const postThumb = post.querySelector('.utf_post_thumb a');
+              if (postThumb) {
+                postThumb.href = item.link;
+                postThumb.querySelector('img').src = item.enclosure ? item.enclosure.link : 'images/news/default.jpg';
+              }
+
+              const postCat = post.querySelector('.utf_post_cat');
+              if (postCat) {
+                postCat.textContent = item.categories.length > 0 ? item.categories[0] : 'News';
+                postCat.href = item.link;
+              }
+
+              const postTitle = post.querySelector('.utf_post_title a');
+              if (postTitle) {
+                postTitle.href = item.link;
+                postTitle.textContent = item.title;
+              }
+
+              const postDate = post.querySelector('.utf_post_date');
+              if (postDate) {
+                postDate.innerHTML = `<i class="fa fa-clock-o"></i> ${new Date(item.pubDate).toLocaleDateString()}`;
+              }
+
+              const postAuthor = post.querySelector('.utf_post_author a');
+              if (postAuthor) {
+                postAuthor.textContent = item.author || 'Unknown';
+                postAuthor.href = item.link;
+              }
+            });
+          }
+        });
+      })
+      .catch(error => console.error('Error fetching RSS feed:', error));
+  }
+
+  document.addEventListener('DOMContentLoaded', loadRSS);
+</script>
+</body>
+</html>
