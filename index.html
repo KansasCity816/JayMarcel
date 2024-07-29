@@ -34,15 +34,39 @@
     fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
-        const items = document.querySelectorAll('#utf_latest_news_slide .item');
+        const items = document.querySelectorAll('.item');
         data.items.forEach((item, index) => {
           if (items[index]) {
-            const article = items[index].querySelector('.utf_post_block_style');
-            article.querySelector('a').href = item.link;
-            article.querySelector('.utf_post_title a').textContent = item.title;
-            article.querySelector('.utf_post_date').textContent = new Date(item.pubDate).toLocaleDateString();
-            if (item.thumbnail) {
-              article.querySelector('.utf_post_thumb img').src = item.thumbnail;
+            const postBlock = items[index].querySelector('.utf_post_block_style');
+            if (postBlock) {
+              const postThumb = postBlock.querySelector('.utf_post_thumb a');
+              if (postThumb) {
+                postThumb.href = item.link;
+                postThumb.querySelector('img').src = item.enclosure ? item.enclosure.link : 'images/news/default.jpg';
+              }
+
+              const postCat = postBlock.querySelector('.utf_post_cat');
+              if (postCat) {
+                postCat.textContent = item.categories.length > 0 ? item.categories[0] : 'News';
+                postCat.href = item.link;
+              }
+
+              const postTitle = postBlock.querySelector('.utf_post_title a');
+              if (postTitle) {
+                postTitle.href = item.link;
+                postTitle.textContent = item.title;
+              }
+
+              const postDate = postBlock.querySelector('.utf_post_date');
+              if (postDate) {
+                postDate.innerHTML = `<i class="fa fa-clock-o"></i> ${new Date(item.pubDate).toLocaleDateString()}`;
+              }
+
+              const postAuthor = postBlock.querySelector('.utf_post_author a');
+              if (postAuthor) {
+                postAuthor.textContent = item.author || 'Unknown';
+                postAuthor.href = item.link;
+              }
             }
           }
         });
@@ -52,6 +76,7 @@
 
   document.addEventListener('DOMContentLoaded', loadRSS);
 </script>
+
 
 
 
